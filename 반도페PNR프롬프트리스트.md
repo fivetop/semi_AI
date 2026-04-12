@@ -9,8 +9,8 @@
 | 프롬프트/기술 | 설명 | 출처 | URL |
 |---------------|------|------|------|
 | **LLM4Floorplan** | Multi-agent 기반 floorplanning 에이전트 | ICLR 2025 (Withdrawn) | https://openreview.net/forum?id=n7s9EwG6hW |
-| **VeoPlace** | VLM 기반 macro placement (，进化的 최적화) | arXiv (2026) | https://arxiv.org/abs/2603.28733 |
-| **EvoPlace** | LLM +Analytical 결합 floorplanning | NeurIPS 2024 | https://arxiv.org/abs/2401.XXXXX |
+| **VeoPlace** | VLM 기반 macro placement (진화적 최적화) | arXiv (2026) | https://arxiv.org/abs/2603.28733 |
+| **EvoPlace** | LLM + Analytical 결합 floorplanning | NeurIPS 2024 | https://arxiv.org/abs/2401.XXXXX |
 | **Dynamic Retrieval-Augmented Thought (DRAT)** | 동적 검색 증강 사고 프롬프트 | LLM4Floorplan | https://openreview.net/forum?id=n7s9EwG6hW |
 | **Floorplan Prompt Template** | Floorplanning 작업용 프롬프트 템플릿 | - | - |
 
@@ -109,7 +109,7 @@
 
 ---
 
-## 11.EDA 도구 통합 프롬프트
+## 11. EDA 도구 통합 프롬프트
 
 | 프롬프트/기술 | 설명 | 출처 | URL |
 |---------------|------|------|------|
@@ -135,7 +135,6 @@
 
 ### 13.1 Standard Cell Layout 최적화 프롬프트
 
-```
 You are an experienced VLSI circuit designer.
 
 [Netlist topology prompt]
@@ -147,70 +146,61 @@ Analyze the routability report and identify routing issues.
 [Cluster constraint generation]
 Generate high-quality cluster constraints to optimize cell layout PPA.
 Use ReAct prompting to explore cluster candidates.
-```
 
 ### 13.2 Macro Placement (VeoPlace) 프롬프트
 
-```
 You are guiding a low-level placement policy for computer chip floorplanning.
 Analyze the chip placement images and prior attempts.
 Provide spatial reasoning over placement solutions.
 Suggest where macros should go based on visual reasoning.
-```
 
 ### 13.3 Floorplanning (LLM4Floorplan) 프롬프트
 
-```
 Task Comprehension: Understand the floorplanning requirements
 Model Selection: Choose appropriate floorplanning model
 Hyperparameter Tuning: Adjust placement parameters
 Code Revisions: Modify floorplan code as needed
 Performance Evaluation: Assess the floorplan quality
-```
 
 ### 13.4 PPA 최적화 (ORFS-agent) 프롬프트
 
-```
 Objective: [timing/power/area]
 Constraint: [specific constraints]
 Technology: [process node]
 PDK: [process design kit]
-```
 
 ---
 
 ## 14. PNR 프롬프트 계층 구조
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│            PNR (Place and Route) 프롬프트 계층          │
-├─────────���───────────────────────────────────────────────────────────────┤
-│  Layer 1: 기본 프롬프트                                      │
-│  ├── Floorplan Prompt                                     │
-│  ├── Placement Prompt                                    │
-│  └── Routing Prompt                                     │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Layer 2: 최적화 프롬프트                                │
-│  ├── PPA Optimization Prompt (Timing/Power/Area)          │
-│  ├── CTS Prompt                                         │
-│  └── Timing Closure Prompt                              │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Layer 3: 검증 프롬프트                                  │
-│  ├── DRC/LVS Verification Prompt                         │
-│  └── Physical Verification Prompt                      │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Layer 4: 특화 프롬프트                                  │
-│  ├── Macro Placement VLM (VeoPlace)                   │
-│  ├── Standard Cell Optimization (NVIDIA)                │
-│  ├── Analog Layout Prompt                             │
-│  └── PCB Placement/Routing (PCB-Bench)               │
-├─────────────────────────────────────────────────────────────────────────┤
-│  Layer 5: 에이전트 프롬프트                            │
-│  ├── LLM4Floorplan (Multi-Agent)                       │
-│  ├── AIVRIL2 (PNR Workflow)                        │
-│  └── ORFS-agent (Optimization Loop)                  │
-└─────────────────────────────────────────────────────────────────────────┘
-```
++--------------------------------------------------------------------+
+|            PNR (Place and Route) 프롬프트 계층                    |
++--------------------------------------------------------------------+
+|  Layer 1: 기본 프롬프트                                      |
+|  +-- Floorplan Prompt                                     |
+|  +-- Placement Prompt                                    |
+|  +-- Routing Prompt                                     |
++--------------------------------------------------------------------+
+|  Layer 2: 최적화 프롬프트                                |
+|  +-- PPA Optimization Prompt (Timing/Power/Area)          |
+|  +-- CTS Prompt                                         |
+|  +-- Timing Closure Prompt                              |
++--------------------------------------------------------------------+
+|  Layer 3: 검증 프롬프트                                  |
+|  +-- DRC/LVS Verification Prompt                         |
+|  +-- Physical Verification Prompt                      |
++--------------------------------------------------------------------+
+|  Layer 4: 특화 프롬프트                                  |
+|  +-- Macro Placement VLM (VeoPlace)                   |
+|  +-- Standard Cell Optimization (NVIDIA)                |
+|  +-- Analog Layout Prompt                             |
+|  +-- PCB Placement/Routing (PCB-Bench)               |
++--------------------------------------------------------------------+
+|  Layer 5: 에이전트 프롬프트                            |
+|  +-- LLM4Floorplan (Multi-Agent)                       |
+|  +-- AIVRIL2 (PNR Workflow)                        |
+|  +-- ORFS-agent (Optimization Loop)                  |
++--------------------------------------------------------------------+
 
 ---
 
