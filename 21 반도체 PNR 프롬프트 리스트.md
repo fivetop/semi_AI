@@ -173,34 +173,13 @@ PDK: [process design kit]
 
 ## 14. PNR 프롬프트 계층 구조
 
-+--------------------------------------------------------------------+
-|            PNR (Place and Route) 프롬프트 계층                    |
-+--------------------------------------------------------------------+
-|  Layer 1: 기본 프롬프트                                      |
-|  +-- Floorplan Prompt                                     |
-|  +-- Placement Prompt                                    |
-|  +-- Routing Prompt                                     |
-+--------------------------------------------------------------------+
-|  Layer 2: 최적화 프롬프트                                |
-|  +-- PPA Optimization Prompt (Timing/Power/Area)          |
-|  +-- CTS Prompt                                         |
-|  +-- Timing Closure Prompt                              |
-+--------------------------------------------------------------------+
-|  Layer 3: 검증 프롬프트                                  |
-|  +-- DRC/LVS Verification Prompt                         |
-|  +-- Physical Verification Prompt                      |
-+--------------------------------------------------------------------+
-|  Layer 4: 특화 프롬프트                                  |
-|  +-- Macro Placement VLM (VeoPlace)                   |
-|  +-- Standard Cell Optimization (NVIDIA)                |
-|  +-- Analog Layout Prompt                             |
-|  +-- PCB Placement/Routing (PCB-Bench)               |
-+--------------------------------------------------------------------+
-|  Layer 5: 에이전트 프롬프트                            |
-|  +-- LLM4Floorplan (Multi-Agent)                       |
-|  +-- AIVRIL2 (PNR Workflow)                        |
-|  +-- ORFS-agent (Optimization Loop)                  |
-+--------------------------------------------------------------------+
+| 레벨 | 프롬프트 유형 | 세부 프롬프트 |
+|------|---------------|---------------|
+| **Layer 1: 기본 프롬프트** | Floorplan/Placement/Routing | Floorplan Prompt, Placement Prompt, Routing Prompt |
+| **Layer 2: 최적화 프롬프트** | PPA/CTS/Timing | PPA Optimization Prompt, CTS Prompt, Timing Closure Prompt |
+| **Layer 3: 검증 프롬프트** | 설계 검증 | DRC/LVS Verification Prompt, Physical Verification Prompt |
+| **Layer 4: 특화 프롬프트** | 도메인 특화 | Macro Placement VLM (VeoPlace), Standard Cell Optimization (NVIDIA), Analog Layout Prompt, PCB Placement/Routing (PCB-Bench) |
+| **Layer 5: 에이전트 프롬프트** | Multi-Agent | LLM4Floorplan (Multi-Agent), AIVRIL2 (PNR Workflow), ORFS-agent (Optimization Loop) |
 
 ---
 
