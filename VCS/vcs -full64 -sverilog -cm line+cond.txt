@@ -1,0 +1,26 @@
+vcs -full64 -sverilog -cm line+cond -cm_dir ./cov/c432 -cm_name BUILD -o simv c432bRTL.v tb-c432bRTL.v -cm_cond full
+./simv -cm line+cond -cm_dir ./cov/c432 -cm_name smoke
+urg -dir ./cov/c432 -format both -report ./cov/REPORT_c432
+verdi -cov -covdir ./cov/c432.vdb
+
+
+14p 해당 표는 coverage  결과를 merge 할 때 txt 로  저장해야 생긴다.
+cov/REPORT_c432 디렉토리 아래 modinfo.txt 에 존재한다.
+
+
+
+vcs 구동 시 발생 warning
+
+Warning-[TFIPC] Too few instance port connections
+vcs 동작 시 발생하는 위 warning은 c432bRTL.v 7행 clk port가 tb_c432bRTL.v 16행에는 없어 발생하는 warning이다.
+이게 문제가 되는가?
+
+Warning-[PCWM-W] Port connection width mismatch
+1-bit 포트 PCB 에 4-bit 신호 Chan 을 연결했다는 경고
+이 워닝도 마찬가지로
+c432bRTL.v 7행
+- c432 (E, A, B, C, clk, PAB, PBB, PCB, ChanB);
+tb_c432bRTL.v 16행
+- c432 C432 (E, A, B, C, PA, PB, PC, Chan);
+에 port 연결이 부정확해 4bit Chan이 PCB에 연결되어 발생하는 warning이다.
+이게 문제가 되는가?
